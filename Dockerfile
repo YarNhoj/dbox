@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
   vim \
   curl \
   build-essential \
-  ruby \
   git \
   && apt-get clean
 
@@ -30,7 +29,6 @@ RUN git clone https://github.com/tpope/vim-pathogen.git ~/.vim
 RUN mkdir -p ~/.vim/plugins && git init -q ~/.vim/plugins
 WORKDIR /home/jray/.vim/plugins
 RUN git submodule add -f https://github.com/tpope/vim-sensible.git ~/.vim/plugins/vim-sensible \
-  && git submodule add -f https://github.com/rodjek/vim-puppet.git ~/.vim/plugins/vim-puppet \
   && git submodule add -f https://github.com/godlygeek/tabular.git ~/.vim/plugins/tabular \
   && git submodule add -f https://github.com/scrooloose/syntastic.git ~/.vim/plugins/syntastic
 
