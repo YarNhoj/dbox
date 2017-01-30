@@ -17,8 +17,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive && apt-get install -y \
 
 # Create user and add dotfiles
 RUN useradd -m -s /bin/bash dev
+COPY bash_skeleton.sh /home/dev/bash_skeleton.sh
 COPY vimrc /home/dev/.vimrc
-RUN chown dev:dev /home/dev/.vimrc
+RUN chown dev:dev /home/dev/.vimrc /home/dev/bash_skeleton.sh
 USER dev
 
 # Add pathogen and vim modules
