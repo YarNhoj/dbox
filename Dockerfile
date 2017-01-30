@@ -6,11 +6,8 @@
 FROM debian:jessie 
 MAINTAINER John R. Ray <john@johnray.io>
 
-# Set the debconf front end to Noninteractive
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-
 # Install admin tools
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive && apt-get install -y \
   wget \
   vim \
   curl \
@@ -30,10 +27,8 @@ RUN mkdir -p ~/.vim/plugins && git init -q ~/.vim/plugins
 WORKDIR /home/dev/.vim/plugins
 RUN git submodule add -f https://github.com/tpope/vim-sensible.git ~/.vim/plugins/vim-sensible \
   && git submodule add -f https://github.com/godlygeek/tabular.git ~/.vim/plugins/tabular \
-  && git submodule add -f https://github.com/scrooloose/syntastic.git ~/.vim/plugins/syntastic \
-  && git submodule add -f https://github.com/kien/rainbow_parentheses.vim.git
+  && git submodule add -f https://github.com/scrooloose/syntastic.git ~/.vim/plugins/syntastic
 
 # Sane Defaults for next image
 USER root
 WORKDIR /
-
